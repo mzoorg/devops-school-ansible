@@ -1,0 +1,22 @@
+---
+- name: Uninstall httpd
+  gather_facts: no
+  hosts: all
+  become: true
+
+  tasks:
+  - name: Ensure apache is absent
+    ansible.builtin.package:
+      name: httpd
+      state: absent
+
+  - name: Del index html to server
+    ansible.builtin.file:
+      path: /var/www/html/index.html
+      state: absent
+
+  - name: Disable port for httpd
+    ansible.posix.firewalld:
+      port: 80/tcp
+      permanent: yes
+      state: disabled

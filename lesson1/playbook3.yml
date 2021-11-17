@@ -1,0 +1,25 @@
+---
+- name: Change line in file
+  hosts: all
+  gather_facts: no
+  become: true
+
+  tasks:
+  - name: Find a line to replace
+    command: grep "GRUB_CMDLINE_LINUX" /etc/default/grub
+    register: myline
+
+  - set_fact: init_line="{{ myline.stdout.strip('\"') }}"
+
+  - name: Add config to grub
+    lineinfile:
+      path: /etc/default/grub
+      line: "{{ init_line }} net.ifnames=0 biosdevname=0\""
+      regexp: '^GRUB_CMDLINE_LINUX'
+    notify: Rebuild grub
+    when: '"net.ifnames=0 biosdevname=0" not in init_line'
+
+  handlers:
+  - name: Rebuild grub
+    command: grub2-mkconfig -o /boot/grub2/grub.cfg
+

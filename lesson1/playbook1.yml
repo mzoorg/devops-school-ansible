@@ -1,0 +1,28 @@
+---
+- name: playbook1
+  gather_facts: no
+  hosts: all
+  become: true
+
+  tasks:
+  - name: Ensure apache is installed
+    ansible.builtin.package:
+      name: httpd
+      state: present
+
+  - name: Ensure apache is run
+    ansible.builtin.service:
+      name: httpd
+      state: started
+
+  - name: Put index html to server
+    ansible.builtin.copy:
+      src: index.html
+      dest: /var/www/html/
+
+  - name: Enable port for httpd
+    become_user: root
+    ansible.posix.firewalld:
+      service: http
+      permanent: yes
+      state: enabled

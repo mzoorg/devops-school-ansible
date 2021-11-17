@@ -1,0 +1,20 @@
+---
+- name: Create three users
+  hosts: all
+  become: true
+  gather_facts: no
+
+  tasks:
+  - include_vars: users
+
+  - ansible.builtin.user:
+      name: "{{ item.name }}"
+      comment: "{{ item.comment }}"
+      password: "{{ item.secret | password_hash('sha512', 'pdfkwe37yvsd12') }}"
+    loop: "{{ users }}"
+ 
+  - ansible.builtin.shell:
+      cmd: cat /etc/shadow
+    register: info
+
+  - debug: var=info.stdout_lines
