@@ -2,7 +2,7 @@
 # handlers file for install_httpd
 - name: Enable port for httpd
   become_user: root
-  ansible.posix.firewalld:
+  firewalld:
     service: http
     permanent: yes
     state: enabled
