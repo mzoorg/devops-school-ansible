@@ -1,0 +1,14 @@
+---
+# handlers file for vsftpd_install
+- name: Restore context
+  command: restorecon -v /var/ftp/pub/upload
+
+- name: Restart firewalld
+  service:
+    name: firewalld
+    state: restarted
+
+- name: Restart vsftpd
+  service:
+   name: vsftpd
+   state: restarted

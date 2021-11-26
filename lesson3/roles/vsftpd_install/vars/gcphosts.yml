@@ -1,0 +1,5 @@
+gcphosts:
+  node1.example.com:
+    ip: 34.92.254.215
+  node2.example.com:
+    ip: 35.220.207.101

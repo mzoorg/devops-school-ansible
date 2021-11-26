@@ -1,0 +1,9 @@
+---
+- name: Install ftp with role
+  hosts: all
+  become: true
+
+  roles:
+  - role: vsftpd_install
+    vars:
+      pasv_mode: true

@@ -1,0 +1,23 @@
+---
+# tasks file for install_httpd
+- name: Set external ip
+  include: set-external-ip.yml
+  when: pasv_mode
+
+- name: Ensure vsftpd is installed
+  include: ensure-vsftpd-installed.yml
+
+- name: Enable ftp on boot
+  include: enable-on-boot.yml
+
+- name: Config dir for vsftpd
+  include: config-ftp-dir.yml
+
+- name: Set selinux policy and context for dir
+  include: set-se-policy-contex.yml
+
+- name: Load config for vsftpd
+  include: load-vsftpd-config.yml
+
+- name: Expose ports
+  include: expose-ports.yml

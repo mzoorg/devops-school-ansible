@@ -1,0 +1,21 @@
+---
+# vars file for vsftpd_install
+
+# Set params for vsftpd.conf
+anonymous_enable: 'YES'
+local_enable: 'NO'
+write_enable: 'YES'
+listen: 'YES'
+listen_ipv6: 'NO'
+anon_upload_enable: 'YES' 
+anon_root: '/var/ftp/pub'
+no_anon_password: 'YES'
+
+# Adding passive ports for nat
+pasv_address: pasv_address={{ external_ip_address }}
+add_passivemode_configs: |
+  pasv_enable=YES
+  pasv_min_port=50000
+  pasv_max_port=50100
+  listen_port=2112
+  pasv_addr_resolve=YES

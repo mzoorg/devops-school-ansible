@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+  <body>
+  <center>
+  <h1>Welcome to my web server</h1>
+    <p> This is {{ name }}</p>
+    <p> Hostname is {{ ansible_facts.hostname }} and IP is {{ ansible_facts.default_ipv4.address }}</p>
+    <p> Done by {{ sign }}</p>
+  </center>
+  </body>
+</html>

@@ -1,0 +1,4 @@
+---
+# defaults file for vsftpd_install
+pasv_mode: false
+external_ip_address: none

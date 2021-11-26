@@ -1,0 +1,10 @@
+---
+- name: Install httpd with role
+  hosts: all
+  become: true
+
+  roles:
+  - role: install_httpd
+    vars: 
+      hellofrom: Krasnoyarsk
+      createdby: Egor Petrochenkov

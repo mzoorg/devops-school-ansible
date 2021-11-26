@@ -1,0 +1,4 @@
+---
+- name: set external ip
+  set_fact:
+    external_ip_address: "{{ ansible_host }}"

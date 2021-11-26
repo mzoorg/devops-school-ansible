@@ -1,0 +1,19 @@
+---
+# tasks file for install_httpd
+- name: Ensure apache is installed
+  ansible.builtin.package:
+    name: httpd
+    state: present
+  notify: Enable port for httpd
+
+- name: Ensure apache is run
+  ansible.builtin.service:
+    name: httpd
+    state: started
+
+- name: Put index html to server
+  ansible.builtin.template:
+    src: index.j2
+    dest: /var/www/html/index.html
+  notify: Restart apache
+

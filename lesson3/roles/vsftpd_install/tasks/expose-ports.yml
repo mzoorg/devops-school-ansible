@@ -1,0 +1,15 @@
+---
+- name: Expose port ftp
+  firewalld:
+    port: 2112/tcp
+    permanent: yes
+    state: enabled
+  notify: Restart firewalld
+
+- name: Expose ports for pasv mode
+  firewalld:
+    port: 50000-50100/tcp
+    permanent: yes
+    state: enabled
+  when: pasv_mode
+  notify: Restart firewalld

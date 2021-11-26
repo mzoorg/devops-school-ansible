@@ -1,0 +1,5 @@
+---
+- name: Enable ftp on boot
+  ansible.builtin.service:
+    name: vsftpd
+    enabled: yes

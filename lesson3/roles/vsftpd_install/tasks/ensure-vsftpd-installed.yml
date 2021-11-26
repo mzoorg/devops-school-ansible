@@ -1,0 +1,5 @@
+---
+- name: Ensure vsftpd is installed
+  ansible.builtin.package:
+    name: vsftpd
+    state: present

@@ -1,0 +1,6 @@
+---
+- name: Config dir for vsftpd
+  ansible.builtin.file:
+    path: /var/ftp/pub/upload
+    state: directory
+    mode: 0777
